@@ -1,2 +1,47 @@
 .App {
+	height: 100vh;
+	background-color: #a1a1a1;
 }
+
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.user-input-matrix {
+
+}
+
+.button-panel {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	padding-bottom: 10px;
+}
+
+.white-block {
+	background-color: white;
+	width: 80%;
+	border: 1px solid black;
+	border-top: 0px;
+}
+
+.button-panel button{
+	font-size: 1.01em;
+	font-weight: bold;
+	border-color: black;
+	margin-top: 10px;
+	margin-left: 10px;
+	background-color: #008f8c;
+	border-radius: 8px;
+	height: 30px;
+	width: 100px;
+	color: white;
+}
+
+.button-panel button:hover{
+	background-color: #02bfbb;
+}
+
+

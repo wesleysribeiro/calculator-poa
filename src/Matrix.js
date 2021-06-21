@@ -6,12 +6,17 @@ class Matrix extends React.Component {
 		super(props)
 
 		this.size = props.size;
+		this.userInputMatrix = new Array(this.size + 1).fill(0).map(() => new Array(this.size + 1).fill(0));
+		this.notifyMatrixChanged = props.onMatrixChanged;
+		console.log(this.userInputMatrix)
+		this.initializeEmptyMatrix()
+	}
 
-		console.log(props)
-
+	initializeEmptyMatrix = () => {
 		this.columns = []
 		this.rows = []
 
+		// Inicializando primeira coluna (não editavel)
 		this.columns.push({
 			field: 'firstCol',
 			headerName: ' ',
@@ -19,6 +24,7 @@ class Matrix extends React.Component {
 			sortable: false
 		})
 
+		// Inicializa campos centrais para o input do usuário
 		for(let i = 0; i < this.size; i++)
 		{
 			const numberStr = i.toString()
@@ -44,6 +50,7 @@ class Matrix extends React.Component {
 			this.rows.push(rowObj)
 		}
 
+		// 
 		this.columns.push({
 			field: 'demanda',
 			headerName: 'Demanda',
@@ -53,17 +60,49 @@ class Matrix extends React.Component {
 			sortable: false
 		})
 
+		//	
 		this.rows.push({
 			id: this.size,
 			firstCol: 'Fornecimento'
 		})
-		console.log(this.columns)
-		console.log(this.rows)
+	}
+
+	getColumnFromColumnField = (columnField) => {
+		const re = /^col(\d)$/;
+		const found = columnField.match(re)
+
+		if(found == null || found.length < 2)
+		{
+			return undefined;
+		}
+		return found[1];
+	}
+
+	onCellEdited = (params) => {
+		console.log(params)
+		const row = params.id;
+		let columnNumber = this.getColumnFromColumnField(params.field)
+
+		if(columnNumber === undefined)
+		{
+			columnNumber = 5;
+		}
+		
+		console.log(this.userInputMatrix[0] === this.userInputMatrix[1])
+		console.log(`row: ${row}, col: ${columnNumber}`)
+		this.userInputMatrix[row][columnNumber] = parseInt(params.props.value)
+		this.notifyMatrixChanged(this.userInputMatrix)
 	}
 
 	render = () => {
+		if(('refresh' in this.props) && this.props.refresh)
+		{
+			this.initializeEmptyMatrix();
+			this.userInputMatrix = new Array(this.size + 1).fill(0).map(() => new Array(this.size + 1).fill(0));
+		}
+
 		return (
-				   <div style={{ height: 450, width: '100%' }}>
+				   <div style={{ height: '75vh', width: '100%' }}>
   						<DataGrid rows={this.rows} columns={this.columns} pageSize={20} 
   							hideFooterPagination
   							hideFooterSelectedRowCount
@@ -71,10 +110,7 @@ class Matrix extends React.Component {
   							isCellEditable={(params) => { 
   								return !(params.field === "demanda" && params.row.id === this.size) ;
   							}}
-  							onEditCellChangeCommitted={(params) => {
-  								console.log('Mexi na cel')
-  								console.log(params)
-  							}}
+  							onEditCellChangeCommitted={this.onCellEdited}
 						/>
 					</div>
 				)
