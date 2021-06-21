@@ -2,14 +2,17 @@ import React from 'react';
 import {DataGrid} from '@material-ui/data-grid';
 
 class Matrix extends React.Component {
+	
 	constructor(props) {
 		super(props)
 
 		this.size = props.size;
-		this.userInputMatrix = new Array(this.size + 1).fill(0).map(() => new Array(this.size + 1).fill(0));
+		this.userInputMatrix = new Array(this.size).fill(0).map(() => new Array(this.size).fill(0));
 		this.notifyMatrixChanged = props.onMatrixChanged;
 		console.log(this.userInputMatrix)
 		this.initializeEmptyMatrix()
+		
+		console.log(this.size);
 	}
 
 	initializeEmptyMatrix = () => {
@@ -51,7 +54,7 @@ class Matrix extends React.Component {
 		}
 
 		// 
-		this.columns.push({
+		/* this.columns.push({
 			field: 'demanda',
 			headerName: 'Demanda',
 			width: 140,
@@ -59,12 +62,12 @@ class Matrix extends React.Component {
 			type: 'number',
 			sortable: false
 		})
-
+ */
 		//	
-		this.rows.push({
+		/* this.rows.push({
 			id: this.size,
 			firstCol: 'Fornecimento'
-		})
+		}) */
 	}
 
 	getColumnFromColumnField = (columnField) => {
@@ -83,9 +86,13 @@ class Matrix extends React.Component {
 		const row = params.id;
 		let columnNumber = this.getColumnFromColumnField(params.field)
 
+	/* 	if(columnNumber > this.size){
+			this.size = columnNumber;
+		} */
+
 		if(columnNumber === undefined)
 		{
-			columnNumber = 5;
+			columnNumber = this.size;
 		}
 		
 		this.userInputMatrix[row][columnNumber] = parseInt(params.props.value)
@@ -95,8 +102,10 @@ class Matrix extends React.Component {
 	render = () => {
 		if(('refresh' in this.props) && this.props.refresh)
 		{
+			this.size = this.props.size;
 			this.initializeEmptyMatrix();
-			this.userInputMatrix = new Array(this.size + 1).fill(0).map(() => new Array(this.size + 1).fill(0));
+			this.userInputMatrix = new Array(this.size).fill(0).map(() => new Array(this.size).fill(0));
+			//this.userInputMatrix = new Array(this.size).map(() => new Array(this.size));
 		}
 
 		return (
