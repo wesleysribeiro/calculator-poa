@@ -100,18 +100,18 @@ class App extends React.Component {
               <Matrix size={this.size} refresh={this.state.refresh} onMatrixChanged={this.onUserInput}/>
           </div>
           <div className="white-block button-panel">
-            <button onClick={this.onClearClicked}>Limpar</button>
-            <button onClick={this.onCalculateClicked}>Calcular</button>
 
             <button onClick={this.on2sizeClicked}>2x2</button>
             <button onClick={this.on3sizeClicked}>3x3</button>
             <button onClick={this.on4sizeClicked}>4x4</button>
             <button onClick={this.on5sizeClicked}>5x5</button>
             
+            <button onClick={this.onClearClicked}>Limpar</button>
+            <button onClick={this.onCalculateClicked}>Calcular</button>
           </div>
           
           <div className="white-block result-container">
-            Passos:
+            Resultado:
           </div>
         </div>
       </div>

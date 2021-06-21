@@ -9,7 +9,7 @@ class Matrix extends React.Component {
 		this.size = props.size;
 		this.userInputMatrix = new Array(this.size).fill(0).map(() => new Array(this.size).fill(0));
 		this.notifyMatrixChanged = props.onMatrixChanged;
-		console.log(this.userInputMatrix)
+		this.notifyMatrixChanged(this.userInputMatrix)
 		this.initializeEmptyMatrix()
 		
 		console.log(this.size);
@@ -18,14 +18,6 @@ class Matrix extends React.Component {
 	initializeEmptyMatrix = () => {
 		this.columns = []
 		this.rows = []
-
-		// Inicializando primeira coluna (não editavel)
-		this.columns.push({
-			field: 'firstCol',
-			headerName: ' ',
-			width: 120,
-			sortable: false
-		})
 
 		// Inicializa campos centrais para o input do usuário
 		for(let i = 0; i < this.size; i++)
