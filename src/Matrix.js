@@ -100,11 +100,22 @@ class Matrix extends React.Component {
 			//this.userInputMatrix = new Array(this.size).map(() => new Array(this.size));
 		}
 
+		let height = 60;
+
+		switch(this.size)
+		{
+			case 2:
+				height -= 10;
+			case 3:
+				height -= 10;
+			case 4:
+				height -= 10;
+		}
+
 		return (
-				   <div style={{ height: '75vh', width: '100%' }}>
+				   <div style={{ height: height.toString() + "vh", width: '100%' }}>
   						<DataGrid rows={this.rows} columns={this.columns} pageSize={20} 
-  							hideFooterPagination
-  							hideFooterSelectedRowCount
+  							hideFooter
   							disableColumnMenu
   							isCellEditable={(params) => { 
   								return !(params.field === "demanda" && params.row.id === this.size) ;

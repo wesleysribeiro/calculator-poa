@@ -1,13 +1,16 @@
 import './App.css';
 import React from 'react';
 import Matrix from './Matrix.js';
+import ResultTable from './ResultTable.js';
 
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       refresh: false,
-      size: 2
+      size: 2,
+      cost: undefined,
+      resultMatrix: undefined
     }
 
     this.matrix = undefined
@@ -17,8 +20,8 @@ class App extends React.Component {
 
   onClearClicked = () => {
     console.log('Button clear clicked')
-    this.setState({refresh: true})
-    this.matrix = undefined
+    this.setState({refresh: true, cost: undefined, resultMatrix: undefined})
+    //this.matrix = undefined
   }
 
   onCalculateClicked = () => {
@@ -40,22 +43,24 @@ class App extends React.Component {
           total += value;
       
           console.log('(' + row + ', ' + col + ') -> ' + value);
-        }
+    }
       
-        console.log('total cost:', total);
+    console.log('total cost:', total);
+
+    this.setState({cost: total, resultMatrix: result})
+
+     
       
-      var print_res = ''
-      for (var i = 0; i < this.size; i++){
-        for (var j = 0; j < this.size; j++){
-          print_res += result[i][j] + '  ';
-        }
-        print_res+= '\n';
+    var print_res = ''
+    for (var i = 0; i < this.size; i++){
+      for (var j = 0; j < this.size; j++){
+        print_res += result[i][j] + '  ';
       }
+      print_res+= '\n';
+    }
 
-      print_res+= '\n\nCusto: ' + total;
-      window.alert(print_res)
-    
-
+    print_res+= '\n\nCusto: ' + total;
+    window.alert(print_res)
   }
 
   on2sizeClicked = () => {
@@ -90,12 +95,23 @@ class App extends React.Component {
   }
 
   render = (props) => {
+
+    let cost = null;
+
+    if(this.state.cost != undefined)
+    {
+      cost = (<div>
+        <strong>Custo</strong>: {this.state.cost}
+      </div>)
+    }
     
     return (
-
-
       <div className="App">
         <div className="container">
+          <div className="white-block header">
+              <h1> Calculadora de Problema de Transporte - Método Húngaro </h1>
+              <p> Desenvolvido para a disciplina de Pesquisa Operacional A </p>
+          </div>
           <div className="white-block user-input-matrix">
               <Matrix size={this.size} refresh={this.state.refresh} onMatrixChanged={this.onUserInput}/>
           </div>
@@ -111,7 +127,9 @@ class App extends React.Component {
           </div>
           
           <div className="white-block result-container">
-            Resultado:
+            <strong>Resultado:</strong>
+            <ResultTable matrix={this.state.resultMatrix}/>
+            {cost}
           </div>
         </div>
       </div>
