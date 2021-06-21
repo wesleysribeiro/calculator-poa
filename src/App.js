@@ -50,6 +50,7 @@ class App extends React.Component {
     this.setState({cost: total, resultMatrix: result})
 
     
+    /*
     var print_res = ''
     for (var i = 0; i < this.size; i++){
       for (var j = 0; j < this.size; j++){
@@ -60,6 +61,7 @@ class App extends React.Component {
 
     print_res+= '\n\nCusto: ' + total;
     window.alert(print_res)
+    */
   }
 
   on2sizeClicked = () => {
@@ -85,8 +87,7 @@ class App extends React.Component {
   }
 
   onUserInput = (matrix) => {
-    this.matrix = matrix.map(val => val);
-    
+    this.matrix = matrix.map(val => val); 
   }
 
   render = (props) => {
