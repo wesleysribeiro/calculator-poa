@@ -9,16 +9,18 @@ class App extends React.Component {
       refresh: false
     }
 
-    this.matrix = [[]]
+    this.matrix = undefined
   }
 
   onClearClicked = () => {
     console.log('Button clear clicked')
     this.setState({refresh: true})
+    this.matrix = undefined
   }
 
   onCalculateClicked = () => {
     // TODO: Calculate using this.matrix value
+    console.log(this.matrix)
   }
 
   onUserInput = (matrix) => {

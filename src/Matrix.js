@@ -88,8 +88,6 @@ class Matrix extends React.Component {
 			columnNumber = 5;
 		}
 		
-		console.log(this.userInputMatrix[0] === this.userInputMatrix[1])
-		console.log(`row: ${row}, col: ${columnNumber}`)
 		this.userInputMatrix[row][columnNumber] = parseInt(params.props.value)
 		this.notifyMatrixChanged(this.userInputMatrix)
 	}
