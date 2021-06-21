@@ -23,18 +23,22 @@ class ResultTable extends React.Component {
 	}
 
 	constructTableFromMatrix = (matrix) => {
+
 		if(!matrix || matrix.length === 0)
 			return null;
 
-		let ret = (
+		console.log(matrix)
+
+		const ret = (
 			<div className="result-table-container" style={{width: "70%"}}>
 				<TableContainer component={Paper}>
 					<Table>
 						<TableBody>
 							{
-								matrix.map(item => {
+								matrix.map((item, ix) => {
+									
 									return (
-										<TableRow key={item}>
+										<TableRow>
 											{item.map(number => <TableCell>{number}</TableCell>)}
 										</TableRow>
 									)
@@ -45,34 +49,14 @@ class ResultTable extends React.Component {
 				</TableContainer>
 			</div> 
 		);
-		return ret;
+
+        console.log(ret)
+	    return ret;
 	} 
 
 	render = () => {
 		const table = this.constructTableFromMatrix(this.props.matrix);
-
 		return table;
-		
-		return (
-			<div className="result-table-container" style={{width: "70%"}}>
-				<TableContainer component={Paper}>
-					<Table>
-						<TableHead>
-							<TableRow>
-								<TableCell>Test</TableCell>
-								<TableCell>Test2</TableCell>
-							</TableRow>
-						</TableHead>
-						<TableBody>
-							<TableRow key={"tessting"}>
-								<TableCell>Col1</TableCell>
-								<TableCell>Col2</TableCell>
-							</TableRow>
-						</TableBody>
-					</Table>
-				</TableContainer>
-			</div>
-		)
 	}
 };
 

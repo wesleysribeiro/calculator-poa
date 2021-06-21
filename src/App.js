@@ -49,8 +49,7 @@ class App extends React.Component {
 
     this.setState({cost: total, resultMatrix: result})
 
-     
-      
+    
     var print_res = ''
     for (var i = 0; i < this.size; i++){
       for (var j = 0; j < this.size; j++){
@@ -64,29 +63,25 @@ class App extends React.Component {
   }
 
   on2sizeClicked = () => {
-    this.size = 2;
-    this.setState({size: 2});
-    this.setState({refresh: true})
-    
+    this.onSizeChanged(2);
   }
 
   on3sizeClicked = () => {
-    this.size = 3;
-    this.setState({size: 3});
-    this.setState({refresh: true})
-    
+    this.onSizeChanged(3);
   }
 
   on4sizeClicked = () => {
-    this.size = 4;
-    this.setState({size: 4});
-    this.setState({refresh: true})
+    this.onSizeChanged(4);
   }
 
   on5sizeClicked = () => {
-    this.size = 5;
-    this.setState({size: 5});
-    this.setState({refresh: true})
+    this.onSizeChanged(5);
+  }
+
+  onSizeChanged = (size) => {
+    this.size = size;
+    this.setState({size: size, refresh: true})
+    this.matrix = new Array(this.size).fill(0).map(() => new Array(this.size).fill(0));;
   }
 
   onUserInput = (matrix) => {
@@ -98,7 +93,7 @@ class App extends React.Component {
 
     let cost = null;
 
-    if(this.state.cost != undefined)
+    if(this.state.cost !== undefined)
     {
       cost = (<div>
         <strong>Custo</strong>: {this.state.cost}
