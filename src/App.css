@@ -42,6 +42,7 @@
 
 .button-panel button:hover{
 	background-color: #02bfbb;
+	cursor: pointer;
 }
 
 
