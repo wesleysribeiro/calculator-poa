@@ -48,20 +48,6 @@ class App extends React.Component {
     console.log('total cost:', total);
 
     this.setState({cost: total, resultMatrix: result})
-
-    
-    /*
-    var print_res = ''
-    for (var i = 0; i < this.size; i++){
-      for (var j = 0; j < this.size; j++){
-        print_res += result[i][j] + '  ';
-      }
-      print_res+= '\n';
-    }
-
-    print_res+= '\n\nCusto: ' + total;
-    window.alert(print_res)
-    */
   }
 
   on2sizeClicked = () => {

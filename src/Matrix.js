@@ -44,22 +44,6 @@ class Matrix extends React.Component {
 			
 			this.rows.push(rowObj)
 		}
-
-		// 
-		/* this.columns.push({
-			field: 'demanda',
-			headerName: 'Demanda',
-			width: 140,
-			editable: true,
-			type: 'number',
-			sortable: false
-		})
- */
-		//	
-		/* this.rows.push({
-			id: this.size,
-			firstCol: 'Fornecimento'
-		}) */
 	}
 
 	getColumnFromColumnField = (columnField) => {
@@ -78,10 +62,6 @@ class Matrix extends React.Component {
 		const row = params.id;
 		let columnNumber = this.getColumnFromColumnField(params.field)
 
-	/* 	if(columnNumber > this.size){
-			this.size = columnNumber;
-		} */
-
 		if(columnNumber === undefined)
 		{
 			columnNumber = this.size;
@@ -97,7 +77,6 @@ class Matrix extends React.Component {
 			this.size = this.props.size;
 			this.initializeEmptyMatrix();
 			this.userInputMatrix = new Array(this.size).fill(0).map(() => new Array(this.size).fill(0));
-			//this.userInputMatrix = new Array(this.size).map(() => new Array(this.size));
 		}
 
 		let height = 60;
